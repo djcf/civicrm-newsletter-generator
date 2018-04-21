@@ -1,0 +1,6 @@
+name = Ccrm Newsletter
+description = TODO: Description of module
+core = 7.x
+
+files[] = tests/ccrm_newsletter.test
+configure = admin/config/TODO-SECTION/ccrm_newsletter
