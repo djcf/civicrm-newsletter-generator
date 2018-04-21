@@ -13,60 +13,6 @@
 /**
  * Implements hook_menu().
  */
-function ccrm_newsletter_menu() {
-  $items = array();
-  // $items['create/newsletter'] = array(
-  //   'title' => 'myPage',
-  //   'page callback' => 'example_page',
-  //   'page arguments' => array(),
-  //   'access arguments' => array('access content'),
-  // );
-  // $items['admin/config/TODO-SECTION/ccrm_newsletter'] = array(
-  //   'title' => 'Administer Ccrm Newsletter',
-  //   'description' => 'Configure settings for Ccrm Newsletter.',
-  //   'page callback' => 'drupal_get_form',
-  //   'page arguments' => array('ccrm_newsletter_settings_form'),
-  //   'access arguments' => array('administer ccrm_newsletter'),
-  //   'file' => 'ccrm_newsletter.admin.inc',
-  // );
-  // Slideshow manage page.
-  $items['create/newsletters'] = array(
-    'title' => 'Generate Newsletter',
-    'description' => 'Add articles to a new CiviCRM mailing.',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('newsletter_manage'),
-    'access arguments' => array('administer ccrm_newsletter'),
-  );
 
-  // Autocomplete callback.
-  $items['newsletter/autocomplete'] = array(
-    'page callback' => 'newsletter_autocomplete',
-    'access arguments' => array('administer ccrm_newsletter'),
-    'type' => MENU_CALLBACK,
-  );
-  return $items;
-}
-
-// Implements hook_theme().
-function ccrm_newsletter_theme($existing, $type, $theme, $path) {
-  return array(
-    'newsletter_manage' => array(
-      'render element' => 'form',
-    ),
-  );
-}
-
-/**
- * Implements hook_permission().
- */
-function ccrm_newsletter_permission() {
-  $permissions = array();
-  $permissions['administer ccrm_newsletter'] = array(
-    'title' => t('TODO: enter permission title'),
-    'description' => t('TODO: enter permission description'),
-  );
-
-  return $permissions;
-}
 
 include("x.php");
