@@ -1,0 +1,1307 @@
+Array
+(
+    [lead] => Array
+        (
+            [subject] => Array
+                (
+                    [#type] => textfield
+                    [#title] => Mailing Subject
+                    [#input] => 1
+                    [#size] => 60
+                    [#maxlength] => 128
+                    [#autocomplete_path] => 
+                    [#process] => Array
+                        (
+                            [0] => form_process_autocomplete
+                            [1] => ajax_process_form
+                            [2] => bootstrap_form_process
+                        )
+
+                    [#theme] => textfield
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => form_element
+                        )
+
+                    [#pre_render] => Array
+                        (
+                            [0] => ctools_dependent_pre_render
+                            [1] => bootstrap_pre_render
+                        )
+
+                    [#after_build] => Array
+                        (
+                            [0] => linkit_field_element_after_build
+                        )
+
+                    [#icon] => 
+                    [#icon_position] => before
+                    [#defaults_loaded] => 1
+                    [#tree] => 1
+                    [#parents] => Array
+                        (
+                            [0] => lead
+                            [1] => subject
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => lead
+                            [1] => subject
+                        )
+
+                    [#weight] => 0
+                    [#processed] => 1
+                    [#required] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#title_display] => before
+                    [#id] => edit-lead-subject
+                    [#name] => lead[subject]
+                    [#value] => "Developing a vision of what you want": George Lakey on the Nordic model
+                    [#needs_validation] => 1
+                    [#autocomplete_input] => Array
+                        (
+                        )
+
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#after_build_done] => 1
+                    [#validated] => 1
+                )
+
+            [title] => Array
+                (
+                    [#type] => textfield
+                    [#title] => Main Article Title
+                    [#input] => 1
+                    [#size] => 60
+                    [#maxlength] => 128
+                    [#autocomplete_path] => 
+                    [#process] => Array
+                        (
+                            [0] => form_process_autocomplete
+                            [1] => ajax_process_form
+                            [2] => bootstrap_form_process
+                        )
+
+                    [#theme] => textfield
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => form_element
+                        )
+
+                    [#pre_render] => Array
+                        (
+                            [0] => ctools_dependent_pre_render
+                            [1] => bootstrap_pre_render
+                        )
+
+                    [#after_build] => Array
+                        (
+                            [0] => linkit_field_element_after_build
+                        )
+
+                    [#icon] => 
+                    [#icon_position] => before
+                    [#defaults_loaded] => 1
+                    [#tree] => 1
+                    [#parents] => Array
+                        (
+                            [0] => lead
+                            [1] => title
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => lead
+                            [1] => title
+                        )
+
+                    [#weight] => 0.001
+                    [#processed] => 1
+                    [#required] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#title_display] => before
+                    [#id] => edit-lead-title
+                    [#name] => lead[title]
+                    [#value] => "Developing a vision of what you want": George Lakey on the Nordic model
+                    [#needs_validation] => 1
+                    [#autocomplete_input] => Array
+                        (
+                        )
+
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#after_build_done] => 1
+                    [#validated] => 1
+                )
+
+            [id] => Array
+                (
+                    [#type] => hidden
+                    [#value] => 
+                    [#attributes] => Array
+                        (
+                            [id] => lead-id
+                        )
+
+                    [#input] => 1
+                    [#process] => Array
+                        (
+                            [0] => ajax_process_form
+                            [1] => bootstrap_form_process
+                        )
+
+                    [#theme] => hidden
+                    [#icon] => 
+                    [#icon_position] => before
+                    [#pre_render] => Array
+                        (
+                            [0] => bootstrap_pre_render
+                        )
+
+                    [#defaults_loaded] => 1
+                    [#tree] => 1
+                    [#parents] => Array
+                        (
+                            [0] => lead
+                            [1] => id
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => lead
+                            [1] => id
+                        )
+
+                    [#weight] => 0.002
+                    [#processed] => 1
+                    [#required] => 
+                    [#title_display] => before
+                    [#id] => edit-lead-id
+                    [#name] => lead[id]
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#validated] => 1
+                )
+
+            [caption] => Array
+                (
+                    [#type] => textarea
+                    [#title] => Main Article Caption
+                    [#input] => 1
+                    [#cols] => 60
+                    [#rows] => 5
+                    [#resizable] => 1
+                    [#process] => Array
+                        (
+                            [0] => ajax_process_form
+                            [1] => bootstrap_form_process
+                        )
+
+                    [#theme] => textarea
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => form_element
+                        )
+
+                    [#pre_render] => Array
+                        (
+                            [0] => ctools_dependent_pre_render
+                            [1] => bootstrap_pre_render
+                        )
+
+                    [#after_build] => Array
+                        (
+                            [0] => linkit_field_element_after_build
+                        )
+
+                    [#icon] => 
+                    [#icon_position] => before
+                    [#defaults_loaded] => 1
+                    [#tree] => 1
+                    [#parents] => Array
+                        (
+                            [0] => lead
+                            [1] => caption
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => lead
+                            [1] => caption
+                        )
+
+                    [#weight] => 0.003
+                    [#processed] => 1
+                    [#required] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#title_display] => before
+                    [#id] => edit-lead-caption
+                    [#name] => lead[caption]
+                    [#value] => CommonSpace talks to American academic and activist George Lakey about the history and lessons of Nordic social democracyACADEMIC AND ACTIVIST GEORGE LAKEY has been working to change the world since the late 1950s. 
+                    [#needs_validation] => 1
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#after_build_done] => 1
+                    [#validated] => 1
+                )
+
+            [#tree] => 1
+            [#parents] => Array
+                (
+                    [0] => lead
+                )
+
+            [#array_parents] => Array
+                (
+                    [0] => lead
+                )
+
+            [#weight] => 0
+            [#processed] => 
+            [#required] => 
+            [#attributes] => Array
+                (
+                )
+
+            [#title_display] => before
+            [#id] => edit-lead
+            [#sorted] => 1
+            [#validated] => 1
+        )
+
+    [aarticles] => Array
+        (
+            [#title] => Recent Articles
+            [#type] => checkboxes
+            [#description] => Select the articles to include in the mailing.
+            [#options] => Array
+                (
+                    [11865] => Energy Strategy Consultation: Common Weal submission
+                    [11864] => Culls threaten Scottish mountain hares with extinction, warn wildlife groups
+                    [11863] => Anti-Trident campaign condemns "absurd" charges as activists are found guilty
+                    [11862] => 3 in 5 LGBTI people in Scotland say theyâ€™ve been a target of hate crime
+                    [11861] => "Developing a vision of what you want": George Lakey on the Nordic model
+                    [11860] => Robin McAlpine: It's time to end corporate interests' hold over food and housing
+                    [11858] => "We've always stepped over the mark a bit": Christina McKelvie MSP on Scotland's humanitarian role
+                    [11859] => New subsidy for the building of private rented housing â€œa step in the wrong directionâ€
+                    [11857] => "A string of failures": Theresa May under fire over Universal Credit and Brexit at PMQs
+                    [11856] => Consciousness and commercialism: The two opposing sides of Kendrick Lamar
+                )
+
+            [#input] => 1
+            [#process] => Array
+                (
+                    [0] => form_process_checkboxes
+                    [1] => bootstrap_form_process
+                )
+
+            [#theme_wrappers] => Array
+                (
+                    [0] => checkboxes
+                )
+
+            [#pre_render] => Array
+                (
+                    [0] => form_pre_render_conditional_form_element
+                    [1] => ctools_dependent_pre_render
+                    [2] => bootstrap_pre_render
+                )
+
+            [#icon] => 
+            [#icon_position] => before
+            [#defaults_loaded] => 1
+            [#tree] => 1
+            [#parents] => Array
+                (
+                    [0] => aarticles
+                )
+
+            [#array_parents] => Array
+                (
+                    [0] => aarticles
+                )
+
+            [#weight] => 0.001
+            [#processed] => 1
+            [#required] => 
+            [#attributes] => Array
+                (
+                )
+
+            [#title_display] => before
+            [#id] => edit-aarticles
+            [#name] => aarticles
+            [#value] => Array
+                (
+                )
+
+            [#needs_validation] => 1
+            [#default_value] => Array
+                (
+                )
+
+            [11865] => Array
+                (
+                    [#type] => checkbox
+                    [#title] => Energy Strategy Consultation: Common Weal submission
+                    [#return_value] => 11865
+                    [#default_value] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#ajax] => 
+                    [#weight] => 0.001
+                    [#input] => 1
+                    [#theme] => checkbox
+                    [#process] => Array
+                        (
+                            [0] => form_process_checkbox
+                            [1] => ajax_process_form
+                            [2] => bootstrap_form_process
+                        )
+
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => form_element
+                        )
+
+                    [#title_display] => after
+                    [#pre_render] => Array
+                        (
+                            [0] => ctools_dependent_pre_render
+                            [1] => bootstrap_pre_render
+                        )
+
+                    [#icon] => 
+                    [#icon_position] => before
+                    [#defaults_loaded] => 1
+                    [#tree] => 1
+                    [#parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11865
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11865
+                        )
+
+                    [#processed] => 1
+                    [#required] => 
+                    [#id] => edit-aarticles-11865
+                    [#name] => aarticles[11865]
+                    [#value] => 0
+                    [#needs_validation] => 1
+                    [#checked] => 
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#validated] => 1
+                )
+
+            [11864] => Array
+                (
+                    [#type] => checkbox
+                    [#title] => Culls threaten Scottish mountain hares with extinction, warn wildlife groups
+                    [#return_value] => 11864
+                    [#default_value] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#ajax] => 
+                    [#weight] => 0.002
+                    [#input] => 1
+                    [#theme] => checkbox
+                    [#process] => Array
+                        (
+                            [0] => form_process_checkbox
+                            [1] => ajax_process_form
+                            [2] => bootstrap_form_process
+                        )
+
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => form_element
+                        )
+
+                    [#title_display] => after
+                    [#pre_render] => Array
+                        (
+                            [0] => ctools_dependent_pre_render
+                            [1] => bootstrap_pre_render
+                        )
+
+                    [#icon] => 
+                    [#icon_position] => before
+                    [#defaults_loaded] => 1
+                    [#tree] => 1
+                    [#parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11864
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11864
+                        )
+
+                    [#processed] => 1
+                    [#required] => 
+                    [#id] => edit-aarticles-11864
+                    [#name] => aarticles[11864]
+                    [#value] => 0
+                    [#needs_validation] => 1
+                    [#checked] => 
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#validated] => 1
+                )
+
+            [11863] => Array
+                (
+                    [#type] => checkbox
+                    [#title] => Anti-Trident campaign condemns "absurd" charges as activists are found guilty
+                    [#return_value] => 11863
+                    [#default_value] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#ajax] => 
+                    [#weight] => 0.003
+                    [#input] => 1
+                    [#theme] => checkbox
+                    [#process] => Array
+                        (
+                            [0] => form_process_checkbox
+                            [1] => ajax_process_form
+                            [2] => bootstrap_form_process
+                        )
+
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => form_element
+                        )
+
+                    [#title_display] => after
+                    [#pre_render] => Array
+                        (
+                            [0] => ctools_dependent_pre_render
+                            [1] => bootstrap_pre_render
+                        )
+
+                    [#icon] => 
+                    [#icon_position] => before
+                    [#defaults_loaded] => 1
+                    [#tree] => 1
+                    [#parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11863
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11863
+                        )
+
+                    [#processed] => 1
+                    [#required] => 
+                    [#id] => edit-aarticles-11863
+                    [#name] => aarticles[11863]
+                    [#value] => 0
+                    [#needs_validation] => 1
+                    [#checked] => 
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#validated] => 1
+                )
+
+            [11862] => Array
+                (
+                    [#type] => checkbox
+                    [#title] => 3 in 5 LGBTI people in Scotland say theyâ€™ve been a target of hate crime
+                    [#return_value] => 11862
+                    [#default_value] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#ajax] => 
+                    [#weight] => 0.004
+                    [#input] => 1
+                    [#theme] => checkbox
+                    [#process] => Array
+                        (
+                            [0] => form_process_checkbox
+                            [1] => ajax_process_form
+                            [2] => bootstrap_form_process
+                        )
+
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => form_element
+                        )
+
+                    [#title_display] => after
+                    [#pre_render] => Array
+                        (
+                            [0] => ctools_dependent_pre_render
+                            [1] => bootstrap_pre_render
+                        )
+
+                    [#icon] => 
+                    [#icon_position] => before
+                    [#defaults_loaded] => 1
+                    [#tree] => 1
+                    [#parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11862
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11862
+                        )
+
+                    [#processed] => 1
+                    [#required] => 
+                    [#id] => edit-aarticles-11862
+                    [#name] => aarticles[11862]
+                    [#value] => 0
+                    [#needs_validation] => 1
+                    [#checked] => 
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#validated] => 1
+                )
+
+            [11861] => Array
+                (
+                    [#type] => checkbox
+                    [#title] => "Developing a vision of what you want": George Lakey on the Nordic model
+                    [#return_value] => 11861
+                    [#default_value] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#ajax] => 
+                    [#weight] => 0.005
+                    [#input] => 1
+                    [#theme] => checkbox
+                    [#process] => Array
+                        (
+                            [0] => form_process_checkbox
+                            [1] => ajax_process_form
+                            [2] => bootstrap_form_process
+                        )
+
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => form_element
+                        )
+
+                    [#title_display] => after
+                    [#pre_render] => Array
+                        (
+                            [0] => ctools_dependent_pre_render
+                            [1] => bootstrap_pre_render
+                        )
+
+                    [#icon] => 
+                    [#icon_position] => before
+                    [#defaults_loaded] => 1
+                    [#tree] => 1
+                    [#parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11861
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11861
+                        )
+
+                    [#processed] => 1
+                    [#required] => 
+                    [#id] => edit-aarticles-11861
+                    [#name] => aarticles[11861]
+                    [#value] => 0
+                    [#needs_validation] => 1
+                    [#checked] => 
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#validated] => 1
+                )
+
+            [11860] => Array
+                (
+                    [#type] => checkbox
+                    [#title] => Robin McAlpine: It's time to end corporate interests' hold over food and housing
+                    [#return_value] => 11860
+                    [#default_value] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#ajax] => 
+                    [#weight] => 0.006
+                    [#input] => 1
+                    [#theme] => checkbox
+                    [#process] => Array
+                        (
+                            [0] => form_process_checkbox
+                            [1] => ajax_process_form
+                            [2] => bootstrap_form_process
+                        )
+
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => form_element
+                        )
+
+                    [#title_display] => after
+                    [#pre_render] => Array
+                        (
+                            [0] => ctools_dependent_pre_render
+                            [1] => bootstrap_pre_render
+                        )
+
+                    [#icon] => 
+                    [#icon_position] => before
+                    [#defaults_loaded] => 1
+                    [#tree] => 1
+                    [#parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11860
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11860
+                        )
+
+                    [#processed] => 1
+                    [#required] => 
+                    [#id] => edit-aarticles-11860
+                    [#name] => aarticles[11860]
+                    [#value] => 0
+                    [#needs_validation] => 1
+                    [#checked] => 
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#validated] => 1
+                )
+
+            [11858] => Array
+                (
+                    [#type] => checkbox
+                    [#title] => "We've always stepped over the mark a bit": Christina McKelvie MSP on Scotland's humanitarian role
+                    [#return_value] => 11858
+                    [#default_value] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#ajax] => 
+                    [#weight] => 0.007
+                    [#input] => 1
+                    [#theme] => checkbox
+                    [#process] => Array
+                        (
+                            [0] => form_process_checkbox
+                            [1] => ajax_process_form
+                            [2] => bootstrap_form_process
+                        )
+
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => form_element
+                        )
+
+                    [#title_display] => after
+                    [#pre_render] => Array
+                        (
+                            [0] => ctools_dependent_pre_render
+                            [1] => bootstrap_pre_render
+                        )
+
+                    [#icon] => 
+                    [#icon_position] => before
+                    [#defaults_loaded] => 1
+                    [#tree] => 1
+                    [#parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11858
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11858
+                        )
+
+                    [#processed] => 1
+                    [#required] => 
+                    [#id] => edit-aarticles-11858
+                    [#name] => aarticles[11858]
+                    [#value] => 0
+                    [#needs_validation] => 1
+                    [#checked] => 
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#validated] => 1
+                )
+
+            [11859] => Array
+                (
+                    [#type] => checkbox
+                    [#title] => New subsidy for the building of private rented housing â€œa step in the wrong directionâ€
+                    [#return_value] => 11859
+                    [#default_value] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#ajax] => 
+                    [#weight] => 0.008
+                    [#input] => 1
+                    [#theme] => checkbox
+                    [#process] => Array
+                        (
+                            [0] => form_process_checkbox
+                            [1] => ajax_process_form
+                            [2] => bootstrap_form_process
+                        )
+
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => form_element
+                        )
+
+                    [#title_display] => after
+                    [#pre_render] => Array
+                        (
+                            [0] => ctools_dependent_pre_render
+                            [1] => bootstrap_pre_render
+                        )
+
+                    [#icon] => 
+                    [#icon_position] => before
+                    [#defaults_loaded] => 1
+                    [#tree] => 1
+                    [#parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11859
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11859
+                        )
+
+                    [#processed] => 1
+                    [#required] => 
+                    [#id] => edit-aarticles-11859
+                    [#name] => aarticles[11859]
+                    [#value] => 0
+                    [#needs_validation] => 1
+                    [#checked] => 
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#validated] => 1
+                )
+
+            [11857] => Array
+                (
+                    [#type] => checkbox
+                    [#title] => "A string of failures": Theresa May under fire over Universal Credit and Brexit at PMQs
+                    [#return_value] => 11857
+                    [#default_value] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#ajax] => 
+                    [#weight] => 0.009
+                    [#input] => 1
+                    [#theme] => checkbox
+                    [#process] => Array
+                        (
+                            [0] => form_process_checkbox
+                            [1] => ajax_process_form
+                            [2] => bootstrap_form_process
+                        )
+
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => form_element
+                        )
+
+                    [#title_display] => after
+                    [#pre_render] => Array
+                        (
+                            [0] => ctools_dependent_pre_render
+                            [1] => bootstrap_pre_render
+                        )
+
+                    [#icon] => 
+                    [#icon_position] => before
+                    [#defaults_loaded] => 1
+                    [#tree] => 1
+                    [#parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11857
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11857
+                        )
+
+                    [#processed] => 1
+                    [#required] => 
+                    [#id] => edit-aarticles-11857
+                    [#name] => aarticles[11857]
+                    [#value] => 0
+                    [#needs_validation] => 1
+                    [#checked] => 
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#validated] => 1
+                )
+
+            [11856] => Array
+                (
+                    [#type] => checkbox
+                    [#title] => Consciousness and commercialism: The two opposing sides of Kendrick Lamar
+                    [#return_value] => 11856
+                    [#default_value] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#ajax] => 
+                    [#weight] => 0.01
+                    [#input] => 1
+                    [#theme] => checkbox
+                    [#process] => Array
+                        (
+                            [0] => form_process_checkbox
+                            [1] => ajax_process_form
+                            [2] => bootstrap_form_process
+                        )
+
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => form_element
+                        )
+
+                    [#title_display] => after
+                    [#pre_render] => Array
+                        (
+                            [0] => ctools_dependent_pre_render
+                            [1] => bootstrap_pre_render
+                        )
+
+                    [#icon] => 
+                    [#icon_position] => before
+                    [#defaults_loaded] => 1
+                    [#tree] => 1
+                    [#parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11856
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => aarticles
+                            [1] => 11856
+                        )
+
+                    [#processed] => 1
+                    [#required] => 
+                    [#id] => edit-aarticles-11856
+                    [#name] => aarticles[11856]
+                    [#value] => 0
+                    [#needs_validation] => 1
+                    [#checked] => 
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#validated] => 1
+                )
+
+            [#validated] => 1
+        )
+
+    [extra_title] => Array
+        (
+            [#title] => Add Article
+            [#type] => textfield
+            [#maxlength] => 60
+            [#autocomplete_path] => newsletters-autocomplete-engine
+            [#input] => 1
+            [#size] => 60
+            [#process] => Array
+                (
+                    [0] => form_process_autocomplete
+                    [1] => ajax_process_form
+                    [2] => bootstrap_form_process
+                )
+
+            [#theme] => textfield
+            [#theme_wrappers] => Array
+                (
+                    [0] => form_element
+                )
+
+            [#pre_render] => Array
+                (
+                    [0] => ctools_dependent_pre_render
+                    [1] => bootstrap_pre_render
+                )
+
+            [#after_build] => Array
+                (
+                    [0] => linkit_field_element_after_build
+                )
+
+            [#icon] => 
+            [#icon_position] => before
+            [#defaults_loaded] => 1
+            [#tree] => 1
+            [#parents] => Array
+                (
+                    [0] => extra_title
+                )
+
+            [#array_parents] => Array
+                (
+                    [0] => extra_title
+                )
+
+            [#weight] => 0.002
+            [#processed] => 1
+            [#required] => 
+            [#attributes] => Array
+                (
+                )
+
+            [#title_display] => before
+            [#id] => edit-extra-title
+            [#name] => extra_title
+            [#value] => 
+            [#needs_validation] => 1
+            [#autocomplete_input] => Array
+                (
+                    [#id] => edit-extra-title-autocomplete
+                    [#url_value] => https://demo.common.scot/index.php?q=newsletters-autocomplete-engine
+                )
+
+            [#ajax_processed] => 
+            [#sorted] => 1
+            [#after_build_done] => 1
+            [#validated] => 1
+        )
+
+    [#tree] => 1
+    [submit] => Array
+        (
+            [#type] => submit
+            [#value] => Generate mailing
+            [#input] => 1
+            [#name] => op
+            [#button_type] => submit
+            [#executes_submit_callback] => 1
+            [#limit_validation_errors] => 
+            [#process] => Array
+                (
+                    [0] => ajax_process_form
+                    [1] => bootstrap_form_process
+                )
+
+            [#theme_wrappers] => Array
+                (
+                    [0] => button
+                )
+
+            [#icon] => 
+            [#icon_position] => before
+            [#pre_render] => Array
+                (
+                    [0] => bootstrap_pre_render
+                )
+
+            [#defaults_loaded] => 1
+            [#tree] => 1
+            [#parents] => Array
+                (
+                    [0] => submit
+                )
+
+            [#array_parents] => Array
+                (
+                    [0] => submit
+                )
+
+            [#weight] => 0.003
+            [#processed] => 1
+            [#required] => 
+            [#attributes] => Array
+                (
+                )
+
+            [#title_display] => before
+            [#id] => edit-submit
+            [#ajax_processed] => 
+            [#sorted] => 1
+            [#validated] => 1
+        )
+
+    [#form_id] => ccrm_newsletter_manage
+    [#type] => form
+    [#build_id] => form-YYBypc1m7Flpynv3sTDLmirP8rSNkJszefp5k8_Fo00
+    [form_build_id] => Array
+        (
+            [#type] => hidden
+            [#value] => form-YYBypc1m7Flpynv3sTDLmirP8rSNkJszefp5k8_Fo00
+            [#id] => form-YYBypc1m7Flpynv3sTDLmirP8rSNkJszefp5k8_Fo00
+            [#name] => form_build_id
+            [#parents] => Array
+                (
+                    [0] => form_build_id
+                )
+
+            [#input] => 1
+            [#process] => Array
+                (
+                    [0] => ajax_process_form
+                    [1] => bootstrap_form_process
+                )
+
+            [#theme] => hidden
+            [#icon] => 
+            [#icon_position] => before
+            [#pre_render] => Array
+                (
+                    [0] => bootstrap_pre_render
+                )
+
+            [#defaults_loaded] => 1
+            [#tree] => 1
+            [#array_parents] => Array
+                (
+                    [0] => form_build_id
+                )
+
+            [#weight] => 0.004
+            [#processed] => 1
+            [#required] => 
+            [#attributes] => Array
+                (
+                )
+
+            [#title_display] => before
+            [#ajax_processed] => 
+            [#sorted] => 1
+            [#validated] => 1
+        )
+
+    [#token] => ccrm_newsletter_manage
+    [form_token] => Array
+        (
+            [#id] => edit-ccrm-newsletter-manage-form-token
+            [#type] => token
+            [#default_value] => MCaj6yzwrEvRf-mxd6SxM4QRqFs4-n8qlDzFLMVuZ2c
+            [#parents] => Array
+                (
+                    [0] => form_token
+                )
+
+            [#input] => 1
+            [#theme] => hidden
+            [#icon] => 
+            [#icon_position] => before
+            [#process] => Array
+                (
+                    [0] => bootstrap_form_process
+                )
+
+            [#pre_render] => Array
+                (
+                    [0] => bootstrap_pre_render
+                )
+
+            [#defaults_loaded] => 1
+            [#tree] => 1
+            [#array_parents] => Array
+                (
+                    [0] => form_token
+                )
+
+            [#weight] => 0.005
+            [#processed] => 1
+            [#required] => 
+            [#attributes] => Array
+                (
+                )
+
+            [#title_display] => before
+            [#name] => form_token
+            [#value] => MCaj6yzwrEvRf-mxd6SxM4QRqFs4-n8qlDzFLMVuZ2c
+            [#needs_validation] => 1
+            [#sorted] => 1
+            [#validated] => 1
+        )
+
+    [form_id] => Array
+        (
+            [#type] => hidden
+            [#value] => ccrm_newsletter_manage
+            [#id] => edit-ccrm-newsletter-manage
+            [#parents] => Array
+                (
+                    [0] => form_id
+                )
+
+            [#input] => 1
+            [#process] => Array
+                (
+                    [0] => ajax_process_form
+                    [1] => bootstrap_form_process
+                )
+
+            [#theme] => hidden
+            [#icon] => 
+            [#icon_position] => before
+            [#pre_render] => Array
+                (
+                    [0] => bootstrap_pre_render
+                )
+
+            [#defaults_loaded] => 1
+            [#tree] => 1
+            [#array_parents] => Array
+                (
+                    [0] => form_id
+                )
+
+            [#weight] => 0.006
+            [#processed] => 1
+            [#required] => 
+            [#attributes] => Array
+                (
+                )
+
+            [#title_display] => before
+            [#name] => form_id
+            [#ajax_processed] => 
+            [#sorted] => 1
+            [#validated] => 1
+        )
+
+    [#id] => ccrm-newsletter-manage
+    [#method] => post
+    [#action] => /create/newsletters
+    [#theme_wrappers] => Array
+        (
+            [0] => form
+        )
+
+    [#icon] => 
+    [#icon_position] => before
+    [#process] => Array
+        (
+            [0] => bootstrap_form_process
+        )
+
+    [#pre_render] => Array
+        (
+            [0] => bootstrap_pre_render
+        )
+
+    [#parents] => Array
+        (
+        )
+
+    [#validate] => Array
+        (
+        )
+
+    [#submit] => Array
+        (
+            [0] => ccrm_newsletter_manage_submit
+        )
+
+    [#theme] => Array
+        (
+            [0] => ccrm_newsletter_manage
+        )
+
+    [#processed] => 1
+    [#defaults_loaded] => 1
+    [#required] => 
+    [#attributes] => Array
+        (
+        )
+
+    [#title_display] => before
+    [#array_parents] => Array
+        (
+        )
+
+    [#sorted] => 1
+    [#attached] => Array
+        (
+            [js] => Array
+                (
+                    [0] => Array
+                        (
+                            [type] => setting
+                            [data] => Array
+                                (
+                                    [urlIsAjaxTrusted] => Array
+                                        (
+                                            [/create/newsletters] => 1
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+        )
+
+    [#validated] => 1
+)

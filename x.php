@@ -164,12 +164,12 @@ function ccrm_newsletter_manage() {
       );
       // Textfield to hold content id.
       $form['articles'][$nid]['title'] = array(
-          '#type' => 'item',
-          '#title' => $title
+          '#type'  => 'textfield',
+          '#value' => $title
       );
       $form['articles'][$nid]['caption'] = array(
-          '#type' => 'item',
-          '#title' => ''
+          '#type' => 'textarea',
+          '#value' => ''
       );
       // This field is invisible, but contains sort info (weights).
       $form['articles'][$nid]['weight'] = array(
@@ -205,7 +205,8 @@ function theme_ccrm_newsletter_manage($variables) {
 	    $rows[] = array(
 	        'data' => array(
 	            array('class' => array('slide-cross')),
-	                drupal_render($form['articles'][$nid]['title']),
+                  drupal_render($form['articles'][$nid]['title']),
+                  drupal_render($form['articles'][$nid]['caption']),
 	                drupal_render($form['articles'][$nid]['weight']),
 	                drupal_render($form['articles'][$nid]['op']),
 	            ),
@@ -238,25 +239,25 @@ function theme_ccrm_newsletter_manage($variables) {
 }
 
 function ccrm_newsletter_manage_submit($form, &$form_state) {
-  $slides = array();
-  foreach ($form_state['values']['articles'] as $slide) {
-      $slides[] = array(
-          'id' => $slide['id'],
-          'weight' => $slide['weight'],
-      );
-  }
-  if (!empty($slides)) {
-      usort($slides, '_ccrm_newsletter_arraysort');
-  }
-  $position = 1;
-  foreach($slides as $slide){
-      $id = $slide['id'];
-      $sql = "UPDATE recent_news SET position={$position} WHERE id = {$id}";
-      db_query($sql);
-      $position++;
-  }
+  // echo "<pre>";
+  // print_r($_POST);
+  // die();
+  // $vars = array(
+  //   'subject' => $form['lead']['subject']['#value'],
+  //   'lead_title' => $form['lead']['title']['#value'],
+  //   'lead_id' => $form['lead']['id']['#value'],
+  //   'lead_caption' => $form['lead']['caption']['#value']
+  // );
+  $vars = array(
+    'subject' => $_POST['lead']['subject'],
+    'lead_title' => $_POST['lead']['title'],
+    'lead_id' => $_POST['lead']['id'],
+    'lead_caption' => $_POST['lead']['caption'],
+    'articles' => $_POST['articles']
+  );
 
-  drupal_set_message(t('Ordering have been saved.'));
+  ccrm_prepare_mailing($vars);
+//  drupal_set_message(t('Ordering have been saved.'));
 }
 
 // Custom array sort function by weight.
@@ -266,3 +267,5 @@ function _ccrm_newsletter_arraysort($a, $b) {
   }
   return 0;
 }
+
+include(__DIR__ . "/cli-util.php");
