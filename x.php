@@ -54,13 +54,13 @@ function ccrm_newsletter_get_node_summary($node, $size=null) {
 }
 
 function ccrm_newsletter_menu() {
-$items = array();
-$items['create/newsletters'] = array(
-    'title' => 'Generate Newsletter',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('ccrm_newsletter_manage'),
-    'access arguments' => array('access administration pages'),
-);
+  $items = array();
+  $items['create/newsletters'] = array(
+      'title' => 'Generate Newsletter',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('ccrm_newsletter_manage'),
+      'access arguments' => array('access administration pages'),
+  );
   $items['newsletters-autocomplete-engine'] = array(
     'page callback' => 'ccrm_newsletter_autocomplete',
     'access arguments' => array('access content'),
@@ -71,7 +71,7 @@ $items['create/newsletters'] = array(
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
-return $items;
+  return $items;
 }
 
 function ccrm_newsletter_fetch_data($text) {
@@ -120,6 +120,22 @@ function ccrm_newsletter_manage() {
 
   # the drupal checkboxes form field definition
   $articles = ccrm_newsletter_get_news();
+  $form['lead']['subject'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Mailing Subject'
+  );
+  $form['lead']['title'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Main Article Title'
+  );
+  $form['lead']['id'] = array(
+    '#type' => 'hidden',
+    '#value' => ''
+  );
+  $form['lead']['caption'] = array(
+    '#type' => 'textarea',
+    '#title' => 'Main Article Caption'
+  );
   $form['aarticles'] = array(
     '#title' => t('Recent Articles'),
     '#type' => 'checkboxes',
@@ -196,7 +212,7 @@ function theme_ccrm_newsletter_manage($variables) {
 	    );
 	}
 
-	$header = array(t('Article'), '', '');
+	$header = array(t('Articles to include in mailing'), '', '');
 	$output = drupal_render($form['note']);
 	$output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('id' => 'slides-order')));
 	$output .= drupal_render_children($form);

@@ -102,7 +102,22 @@ var captions = {captiontable};
 
 			function add_row(id, caption, title, tpl) {
 				newRow = $(tpl);
-				newRow.find('a.remove-row').click(function() {
+				newRow.find('a.make-lead').click(function(event) {
+					event.preventDefault();
+				  parent = $(this).closest('tr');
+				  parent.fadeOut(function() {
+	  				  $('#edit-lead-title')  .val(title);
+	  				  $('#edit-lead-subject').val(title);
+	  				  $('#edit-lead-id')     .val(id);
+	  				  $('#edit-lead-caption').text(caption);
+				  });
+				});
+				if($("#tr-" + id).length == 0) {
+					$('#slides-order').addTableRow(newRow);
+					$(this).fadeOut(function() { });
+				}
+				newRow.find('a.remove-row').click(function(event) {
+					event.preventDefault();
 				  parent = $(this).closest('tr');
 				  chkbox_tpl = '{newchkbox}';
 				  chkbox_tpl = chkbox_tpl.replace(/{nid}/g, id);
@@ -123,7 +138,8 @@ var captions = {captiontable};
 		});
 
 
-		$(".form-item-aarticles .form-item").click(function() {
+		$(".form-item-aarticles .form-item").click(function(event) {
+					event.preventDefault();
 			// $(this).find('input').each(function() {
 			// 	$(this).attr('checked', true);
 			// });
