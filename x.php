@@ -130,7 +130,8 @@ function ccrm_newsletter_manage() {
   );
   $form['lead']['id'] = array(
     '#type' => 'hidden',
-    '#value' => ''
+    '#value' => '',
+    '#attributes' => array('id' => 'lead-id'),
   );
   $form['lead']['caption'] = array(
     '#type' => 'textarea',
@@ -183,7 +184,7 @@ function ccrm_newsletter_manage() {
       );
   }
 
-  $form['submit'] = array('#type' => 'submit', '#value' => t('Save changes'));
+  $form['submit'] = array('#type' => 'submit', '#value' => t('Generate mailing'));
   return $form;
 }
 
@@ -237,31 +238,31 @@ function theme_ccrm_newsletter_manage($variables) {
 }
 
 function ccrm_newsletter_manage_submit($form, &$form_state) {
-$slides = array();
-foreach ($form_state['values']['articles'] as $slide) {   
-    $slides[] = array(
-        'id' => $slide['id'],       
-        'weight' => $slide['weight'],
-    );         
-}
-if (!empty($slides)) {
-    usort($slides, '_ccrm_newsletter_arraysort');
-}
-$position = 1;
-foreach($slides as $slide){
-    $id = $slide['id'];
-    $sql = "UPDATE recent_news SET position={$position} WHERE id = {$id}";
-    db_query($sql);
-    $position++;
-}
+  $slides = array();
+  foreach ($form_state['values']['articles'] as $slide) {
+      $slides[] = array(
+          'id' => $slide['id'],
+          'weight' => $slide['weight'],
+      );
+  }
+  if (!empty($slides)) {
+      usort($slides, '_ccrm_newsletter_arraysort');
+  }
+  $position = 1;
+  foreach($slides as $slide){
+      $id = $slide['id'];
+      $sql = "UPDATE recent_news SET position={$position} WHERE id = {$id}";
+      db_query($sql);
+      $position++;
+  }
 
-drupal_set_message(t('Ordering have been saved.'));
+  drupal_set_message(t('Ordering have been saved.'));
 }
 
 // Custom array sort function by weight.
 function _ccrm_newsletter_arraysort($a, $b) {
-if (isset($a['weight']) && isset($b['weight'])) {
-    return $a['weight'] < $b['weight'] ? -1 : 1;
-}
-return 0;
+  if (isset($a['weight']) && isset($b['weight'])) {
+      return $a['weight'] < $b['weight'] ? -1 : 1;
+  }
+  return 0;
 }

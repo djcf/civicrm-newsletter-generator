@@ -108,7 +108,7 @@ var captions = {captiontable};
 				  parent.fadeOut(function() {
 	  				  $('#edit-lead-title')  .val(title);
 	  				  $('#edit-lead-subject').val(title);
-	  				  $('#edit-lead-id')     .val(id);
+	  				  $('#lead-id')          .val(id);
 	  				  $('#edit-lead-caption').text(caption);
 				  });
 				});
