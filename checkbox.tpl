@@ -1,0 +1,1 @@
+<div class="form-item form-item-aarticles-{nid} form-type-checkbox checkbox"> <label class="control-label" for="edit-aarticles-{nid}"><input id="edit-aarticles-{nid}" name="aarticles[{nid}]" value="{nid}" class="form-checkbox" type="checkbox">{title}</label></div>

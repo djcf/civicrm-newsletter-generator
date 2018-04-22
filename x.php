@@ -2,124 +2,235 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-function get_news() {
- $defaults = array(
-     'max' => 30,
-     'pager' => null,
-     'type' => 'article',
-     'entity' => 'node',
-     'status' => NODE_PUBLISHED,
-     'order' => 'DESC',
- );
+function ccrm_newsletter_get_news($simple=true) {
+   $defaults = array(
+       'max' => 10,
+       'pager' => null,
+       'type' => 'article',
+       'entity' => 'node',
+       'status' => NODE_PUBLISHED,
+       'order' => 'DESC',
+   );
 
- $query = new EntityFieldQuery();
- $query =  $query->entityCondition('entity_type', $defaults['entity'])
-         ->entityCondition('bundle', $defaults['type'])
-         ->propertyCondition('status', $defaults['status'])
-         ->fieldCondition('field_image', 'fid', 'NULL', '!=');
+   $query = new EntityFieldQuery();
+   $query =  $query->entityCondition('entity_type', $defaults['entity'])
+           ->entityCondition('bundle', $defaults['type'])
+           ->propertyCondition('status', $defaults['status'])
+           ->fieldCondition('field_image', 'fid', 'NULL', '!=');
 
    $query->propertyOrderBy('created', $defaults['order']);
- $query->range(0, $defaults['max']);
- $entities = $query->execute();
+   $query->range(0, $defaults['max']);
+   $entities = $query->execute();
 
- //return array();
- $news_items_nids = array_keys($entities[$defaults['entity']]);
- $news_items = entity_load($defaults['entity'], $news_items_nids);
- $r = array();
- foreach($news_items as $nid => $news_item) {
-   $r[$nid] = $news_item->title;
- }
- return $r;
+   //return array();
+   $news_items = node_load_multiple(array_keys($entities[$defaults['entity']]));
+   // $news_items_nids = array_keys($entities[$defaults['entity']]);
+   // $news_items = entity_load($defaults['entity'], $news_items_nids);
+   $r = array();
+   foreach($news_items as $nid => $node) {
+    if ($simple) {
+     $r[$nid] = $node->title;
+    } else {
+     $r[$nid] = array(
+        "title" => $node->title,
+        "teaser" => ccrm_newsletter_get_node_summary($node)
+     );
+    }
+   }
+   return $r;
+}
+
+function ccrm_newsletter_get_node_summary($node, $size=null) {
+  if (isset($node->body_value)) {
+    return str_replace('"', "'", strip_tags($node->body_summary ?
+      $node->body_summary :
+      text_summary($node->body_value, null, $size)
+    ));
+  }
+  return str_replace('"', "'", strip_tags($node->body['und'][0]['summary'] ?
+    $node->body['und'][0]['summary'] :
+    text_summary($node->body['und'][0]['value'], null, $size)
+  ));
 }
 
 function ccrm_newsletter_menu() {
 $items = array();
 $items['create/newsletters'] = array(
-    'title' => 'Recent News: List Links',   
+    'title' => 'Generate Newsletter',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ccrm_newsletter_manage'),
     'access arguments' => array('access administration pages'),
 );
+  $items['newsletters-autocomplete-engine'] = array(
+    'page callback' => 'ccrm_newsletter_autocomplete',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['newsletters-fetch-data'] = array(
+    'page callback' => 'ccrm_newsletter_fetch_data',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
 return $items;
 }
 
-function ccrm_newsletter_manage() {
-//$db_result = db_query( "select nid,title from node");
-// create array and add one element called data
-	$db_result = get_news();
-$rows= array();
-$form['#tree'] = TRUE;
-$max = 60;
-foreach($db_result as $nid => $title){
-    if(strlen($title)>$max)
-        $title = substr($title,0,$max).' ...';
-    $form['slides'][$nid]['id'] = array(
-        '#type' => 'hidden',      
-        '#default_value' => $nid,       
+function ccrm_newsletter_fetch_data($text) {
+  $results = array();
+ 
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_body', 'd', '(d.entity_id = n.nid AND d.entity_type = :node)', array(':node' => 'node'));
+  $query
+      ->condition('n.nid', $text, '=')
+      ->fields('n', array('title', 'nid'))
+      ->fields('d', array('body_value', 'body_summary'))
+      ->orderBy('created', 'ASC');
+  $articles = $query->execute();
+  foreach ($articles as $row) {
+    $results[$row->nid] = array(
+      "title" => check_plain($row->title),
+      "body"  => check_plain(ccrm_newsletter_get_node_summary($row))
     );
-    // Textfield to hold content id.
-    $form['slides'][$nid]['title'] = array(
-        '#type' => 'item',        
-        '#title' => $title
-    );     
-    // This field is invisible, but contains sort info (weights).
-    $form['slides'][$nid]['weight'] = array(
-        '#type' => 'weight',
-        '#title' => t('Weight'),
-        '#title_display' => 'invisible',
-        '#default_value' => 10,
-    );
+  }
+ 
+  drupal_json_output(array_shift($results));
 }
 
-$form['submit'] = array('#type' => 'submit', '#value' => t('Save changes'));
-return $form;
+function ccrm_newsletter_autocomplete($text) {
+  $results = array();
+ 
+  $query = db_select('node', 'n');
+  $query
+      ->condition('n.title', '%' . db_like($text) . '%', 'LIKE')
+      ->fields('n', array('title', 'nid'))
+      ->range(0, 15)
+      ->orderBy('created', 'ASC');
+  $articles = $query->execute();
+ 
+  foreach ($articles as $row) {
+    $results[$row->nid] = check_plain($row->title);
+  }
+ 
+  drupal_json_output($results);
+}
+
+function ccrm_newsletter_manage() {
+  //$db_result = db_query( "select nid,title from node");
+  // create array and add one element called data
+  //$db_result = ccrm_newsletter_get_news();
+
+  # the drupal checkboxes form field definition
+  $articles = ccrm_newsletter_get_news();
+  $form['aarticles'] = array(
+    '#title' => t('Recent Articles'),
+    '#type' => 'checkboxes',
+    '#description' => t('Select the articles to include in the mailing.'),
+    '#options' => ccrm_newsletter_get_news(true),
+  );
+
+  $form['extra_title'] = array(
+    '#title' => t('Add Article'),
+    '#type' => 'textfield',
+    '#maxlength' => 60,
+    '#autocomplete_path' => 'newsletters-autocomplete-engine',
+  );
+
+  $db_result = array();
+  $rows= array();
+  $form['#tree'] = TRUE;
+  $max = 60;
+  foreach($db_result as $nid => $title){
+      if(strlen($title)>$max)
+          $title = substr($title,0,$max).' ...';
+      $form['articles'][$nid]['id'] = array(
+          '#type' => 'hidden',
+          '#default_value' => $nid,
+      );
+      // Textfield to hold content id.
+      $form['articles'][$nid]['title'] = array(
+          '#type' => 'item',
+          '#title' => $title
+      );
+      $form['articles'][$nid]['caption'] = array(
+          '#type' => 'item',
+          '#title' => ''
+      );
+      // This field is invisible, but contains sort info (weights).
+      $form['articles'][$nid]['weight'] = array(
+          '#type' => 'weight',
+          '#title' => t('Weight'),
+          '#title_display' => 'invisible',
+          '#default_value' => 10,
+      );
+      // Operation links (to remove rows).
+      $form['articles'][$nid]['op'] = array(
+        '#markup' => '<a href="#" class="remove-row">' . t('x') . '</a>',
+      );
+  }
+
+  $form['submit'] = array('#type' => 'submit', '#value' => t('Save changes'));
+  return $form;
 }
 
 function ccrm_newsletter_theme($existing, $type, $theme, $path) {
-return array(
-    'ccrm_newsletter_manage' => array(
-        'render element' => 'form',
-    ),
-);
+	return array(
+	    'ccrm_newsletter_manage' => array(
+	        'render element' => 'form',
+	    ),
+	);
 }
 
 function theme_ccrm_newsletter_manage($variables) {
-$form = $variables['form'];
+	$form = $variables['form'];
 
-$rows = array();
-foreach (element_children($form['slides']) as $nid) {
-    $form['slides'][$nid]['weight']['#attributes']['class'] = array('slides-order-weight');
-    $rows[] = array(
-        'data' => array(
-            array('class' => array('slide-cross')),               
-                drupal_render($form['slides'][$nid]['title']),
-                drupal_render($form['slides'][$nid]['weight']),       
-            ),
-        'class' => array('draggable'),
-    );
-}
+	$rows = array();
+	foreach (element_children($form['articles']) as $nid) {
+	    $form['articles'][$nid]['weight']['#attributes']['class'] = array('slides-order-weight');
+	    $rows[] = array(
+	        'data' => array(
+	            array('class' => array('slide-cross')),
+	                drupal_render($form['articles'][$nid]['title']),
+	                drupal_render($form['articles'][$nid]['weight']),
+	                drupal_render($form['articles'][$nid]['op']),
+	            ),
+	        'class' => array('draggable'),
+	    );
+	}
 
-$header = array('',t('title'),t('position'));
-$output = drupal_render($form['note']);
-$output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('id' => 'slides-order')));
-$output .= drupal_render_children($form);
+	$header = array(t('Article'), '', '');
+	$output = drupal_render($form['note']);
+	$output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('id' => 'slides-order')));
+	$output .= drupal_render_children($form);
 
-drupal_add_tabledrag('slides-order', 'order', 'sibling', 'slides-order-weight');
+	drupal_add_tabledrag('slides-order', 'order', 'sibling', 'slides-order-weight');
 
-return $output;
+  // jQuery to implement remove feature. Setting the text field to empty
+  // and submitting the form will remove the rows.
+	$js_injectable = file_get_contents(__DIR__ . "/scripts.js");
+	$row_tpl = file_get_contents(__DIR__ . "/row.tpl");
+	$row_tpl_safe = str_replace(array('\n', '\t', '\r', '  '), '', $row_tpl);
+	$chkbox_tpl = file_get_contents(__DIR__ . "/checkbox.tpl");
+	$chkbox_tpl_safe = str_replace(array('\n', '\t', '\r', '  '), '', $chkbox_tpl);
+
+	$interpolated_script = str_replace("{newrow}", $row_tpl_safe, $js_injectable);
+	$interpolated_script = str_replace("{newchkbox}", $chkbox_tpl_safe, $interpolated_script);
+  $interpolated_script = str_replace("{captiontable}", str_replace(array('\n','\t','\r'), '', json_encode(ccrm_newsletter_get_news(false))), $interpolated_script);
+
+	drupal_add_js($interpolated_script, array('type' => 'inline'));
+
+	return $output;
 }
 
 function ccrm_newsletter_manage_submit($form, &$form_state) {
-$slides = array(); 
-foreach ($form_state['values']['slides'] as $slide) {   
+$slides = array();
+foreach ($form_state['values']['articles'] as $slide) {   
     $slides[] = array(
         'id' => $slide['id'],       
         'weight' => $slide['weight'],
     );         
-}  
+}
 if (!empty($slides)) {
     usort($slides, '_ccrm_newsletter_arraysort');
-}  
+}
 $position = 1;
 foreach($slides as $slide){
     $id = $slide['id'];

@@ -1,0 +1,1 @@
+<tr class="draggable" id="tr-{nid}"><td>{title}</td><td>{caption}</td><td><input class="sort-order" type="hidden" value="1"/></td><td><a href="#" class="remove-row">x</a></td></tr>
