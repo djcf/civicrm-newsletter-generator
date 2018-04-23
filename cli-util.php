@@ -51,6 +51,11 @@ function ccrm_prepare_mailing($vars) {
 				'uf_id' => $user->uid,
 			));
 	extract($vars);
+	$result = civicrm_api3('Group', 'get', array('title' => "Commonspace Daily Newsletter"));
+	if ($result['values']) {
+		$to_group = array_shift($result['values']);
+		$to_group = $to_group['id'];
+	}
 	$options = array(
 		'header_id' => $header_id,
 		'footer_id' => $footer_id,
@@ -59,7 +64,11 @@ function ccrm_prepare_mailing($vars) {
 		'body_text' => get_body_text($vars),
 		'body_html' => get_body_html($vars),
 		'created_id'=> $created_id,
+		'groups' => array('include' => array(isset($to_group) ? $to_group : null)),
 	);
+
+	print_r($options);
+	die();
 
 	$results = civicrm_api3('Mailing', 'create', $options);
 
@@ -68,7 +77,6 @@ function ccrm_prepare_mailing($vars) {
 
 function ccrm_component_format($vars, $template) {
 	$subject = file_get_contents(__DIR__ . "/templates/AutoNewsletter $template.tpl");
-	echo __DIR__ . "/templates/AutoNewsletter $template.tpl";
 	foreach($vars as $search=>$replace) {
 		if (!is_array($search)) {
 			if(!$replace) {
@@ -99,8 +107,9 @@ function get_body_html($vars) {
 			$i++;
 		}
 		$r[] = ccrm_component_format($template_array, "Article Box-$size");
-		$r[] = $spacer;
+		//$r[] = $spacer;
 	}
+	$r[] = $spacer;
 	return implode($r, "\n\n\n<!--*******************************-->\n\n\n");
 }
 

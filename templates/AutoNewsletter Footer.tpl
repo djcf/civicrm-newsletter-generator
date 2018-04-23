@@ -17,7 +17,7 @@
                                                                                 </p>
 
                                                                                 <p style="margin: 1em 0px; margin-bottom: 0px;">
-                                                                                        {action.unsubscribeUrl}
+                                                                                        <a href="{action.unsubscribeUrl}">Click here to unsubscribe.</a>
                                                                                 </p>
                                                                         </td>
                                                                 </tr>
