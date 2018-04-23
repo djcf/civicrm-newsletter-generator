@@ -1,4 +1,4 @@
-<p><meta content="text/html; charset=UTF-8" http-equiv="Content-Type"><meta name="viewport" content="initial-scale=1.0"><meta name="format-detection" content="telephone=no"></p>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"><meta name="viewport" content="initial-scale=1.0"><meta name="format-detection" content="telephone=no"></p>
 <title></title>
 <style type="text/css">body{ Margin: 0; padding: 0; }
     img{ border: 0px; display: block; }
@@ -117,7 +117,6 @@
     }
      #ko_socialBlock_9 .long-text p{ Margin: 1em 0px }  #ko_socialBlock_9 .long-text p:last-child{ Margin-bottom: 0px }  #ko_socialBlock_9 .long-text p:first-child{ Margin-top: 0px }
 </style>
-<p></p>
 
 <center><!-- preheaderBlock --><!-- /preheaderBlock -->
 <table bgcolor="#4d4d4d" border="0" cellpadding="0" cellspacing="0" class="vb-outer" id="ko_sideArticleBlock_4" style="background-color: #4d4d4d;" width="100%">

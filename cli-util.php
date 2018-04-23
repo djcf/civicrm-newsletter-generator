@@ -106,10 +106,9 @@ function get_body_html($vars) {
 
 function get_body_text($vars) {
 	extract($vars);
-	$r = array("COMMONSPACE DAILY NEWSLETTER");
+	$r = array();
 //	$r[] = "";
 //	$r[] = "!($lead_image)";
-	$r[] = "";
 	$r[] = $lead_title;
 	$r[] = str_repeat('=', strlen($lead_title));
 	$r[] = $lead_caption;
