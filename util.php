@@ -229,9 +229,9 @@ function theme_ccrm_newsletter_manage($variables) {
   // jQuery to implement remove feature. Setting the text field to empty
   // and submitting the form will remove the rows.
 	$js_injectable = file_get_contents(__DIR__ . "/scripts.js");
-	$row_tpl = file_get_contents(__DIR__ . "/row.tpl");
+	$row_tpl = file_get_contents(__DIR__ . "/templates/ui-row.tpl");
 	$row_tpl_safe = str_replace(array('\n', '\t', '\r', '  '), '', $row_tpl);
-	$chkbox_tpl = file_get_contents(__DIR__ . "/checkbox.tpl");
+	$chkbox_tpl = file_get_contents(__DIR__ . "/templates/checkbox.tpl");
 	$chkbox_tpl_safe = str_replace(array('\n', '\t', '\r', '  '), '', $chkbox_tpl);
 
 	$interpolated_script = str_replace("{newrow}", $row_tpl_safe, $js_injectable);
@@ -273,5 +273,3 @@ function _ccrm_newsletter_arraysort($a, $b) {
   }
   return 0;
 }
-
-include(__DIR__ . "/cli-util.php");

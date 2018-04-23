@@ -15,4 +15,5 @@
  */
 
 
-include("x.php");
+include("util.php");
+include("cli-util.php");

@@ -31,42 +31,60 @@ function ccrm_prepare_mailing($vars) {
     // 'articles' => $_POST['articles']
 
 	global $user;
-	$mailing_components = ccrm_get_mailing_components();
+
 	$vars['lead_image'] = ccrm_get_image($lead_id, "picturebox");
 	$vars['lead_url']   = url("node/$lead_id", array('absolute' => true));
 	foreach($vars['articles'] as &$article) {
 		$article['url']   = url("node/{$article['id']}", array('absolute' => true));
 		$article['image'] = ccrm_get_image($article['id'], "thumbnail");
 	}
-	extract($vars);
-	$options = array(
-		'header_id' => $mailing_components['AutoNewsletter Header']['id'],
-		'footer_id' => $mailing_components['AutoNewsletter Footer']['id'],
-		'name'      => $mailing_name,
-		'subject'   => $mailing_subject,
-		'body_text' => get_body_text($vars, $mailing_components),
-		'body_html' => get_body_html($vars, $mailing_components),
-		'created_id'=> civicrm_api3('UFMatch', 'getvalue', array(
+	$header_id = civicrm_api3('MailingComponent', 'getvalue', array(
+				'return' => "id",
+				'name' => "AutoNewsletter Header",
+			));
+	$footer_id = civicrm_api3('MailingComponent', 'getvalue', array(
+				'return' => "id",
+				'name' => "AutoNewsletter Footer",
+			));
+	$created_id = civicrm_api3('UFMatch', 'getvalue', array(
 				'return' => "contact_id",
 				'uf_id' => $user->uid,
-			)),
+			));
+	extract($vars);
+	$options = array(
+		'header_id' => $header_id,
+		'footer_id' => $footer_id,
+		'name'      => $mailing_name,
+		'subject'   => $mailing_subject,
+		'body_text' => get_body_text($vars),
+		'body_html' => get_body_html($vars),
+		'created_id'=> $created_id,
 	);
 	print_r($options);
 	die();
 }
 
-function ccrm_component_format($vars, $subject) {
+function ccrm_component_format($vars, $template) {
+	$subject = file_get_contents(__DIR__ . "/templates/AutoNewsletter $template.tpl");
 	foreach($vars as $search=>$replace) {
 		if (!is_array($search)) {
+			if(!$replace) {
+				$replace = "INSERT_ARTICLE_$replace_HERE";
+			}
 			$subject = str_replace("{" . $search . "}", $replace, $subject);
 		}
 	}
 	return $subject;
 }
 
-function get_body_html($vars, $components) {
-	$r = array();
-	$r[] = ccrm_component_format($vars, $components['AutoNewsletter Lead Box']);
+function get_body_html($vars) {
+	print_r($vars);
+	$spacer = file_get_contents(__DIR__ . "/templates/spacer.tpl");
+	$r = array($spacer);
+	if ($lead_id) {
+		$r[] = ccrm_component_format($vars, 'Lead Box');
+		$r[] = $spacer;
+	}
 	foreach(array_chunk($articles, 2) as $article_pair) {
 		$i = 1;
 		$template_array = array();
@@ -76,12 +94,13 @@ function get_body_html($vars, $components) {
 				$template_array[$article_field . "_$i"] = $value;
 			}
 		}
-		$r[] = ccrm_component_format($template_array, $components['AutoNewsletter Article Box']);
+		$r[] = ccrm_component_format($template_array, 'Article Box');
+		$r[] = $spacer;
 	}
-	return implode("$r", "\n\n\n<!--*******************************-->\n\n\n");
+	return implode($r, "\n\n\n<!--*******************************-->\n\n\n");
 }
 
-function get_body_text($vars, $components) {
+function get_body_text($vars) {
 	extract($vars);
 	$r = array("COMMONSPACE DAILY NEWSLETTER");
 	$r[] = "";
@@ -104,15 +123,27 @@ function get_body_text($vars, $components) {
 	return implode($r, "\n");
 }
 
-function ccrm_get_mailing_components() {
-	$r = array();
-	$results = civicrm_api3('MailingComponent', 'get', array(
-		'name' => array('LIKE' => "AutoNews%"),
-	));
-	foreach ($results['values'] as $result) {
-		$r[$result['name']] = $result;
-	}
-	return $r;
-}
+// function ccrm_get_mailing_components() {
+// 	$r = array();
+// 	$results = civicrm_api3('MailingComponent', 'get', array(
+// 		'name' => array('LIKE' => "AutoNews%"),
+// 	));
+// 	foreach ($results['values'] as $result) {
+// 		$r[$result['name']] = $result;
+// 	}
+// 	return $r;
+// }
 
-include("util-text.php");
+// function ccrm_refresh_components($component_names = array("Article Box", "Footer", "Header", "Lead Box")) {
+// 	$mailing_components = ccrm_get_mailing_components();
+// 	foreach($component_names as $name) {
+// 		$component_name = "AutoNews $name";
+// 		$template_contents = file_get_contents(__DIR__ . "/templates/$component_name.tpl");
+// 		if(array_key_exists($component_name, $mailing_components)) {
+// 			$result = civicrm_api3('MailingComponent', 'delete', array(
+// 				'id' => $mailing_components[$component_name]['id'],
+// 			));
+// 		}
+
+// 	}
+// }
