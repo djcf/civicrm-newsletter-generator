@@ -91,13 +91,13 @@ function ccrm_newsletter_fetch_data($text) {
       "body"  => check_plain(ccrm_newsletter_get_node_summary($row))
     );
   }
- 
+
   drupal_json_output(array_shift($results));
 }
 
 function ccrm_newsletter_autocomplete($text) {
   $results = array();
- 
+
   $query = db_select('node', 'n');
   $query
       ->condition('n.title', '%' . db_like($text) . '%', 'LIKE')
@@ -105,11 +105,11 @@ function ccrm_newsletter_autocomplete($text) {
       ->range(0, 15)
       ->orderBy('created', 'ASC');
   $articles = $query->execute();
- 
+
   foreach ($articles as $row) {
     $results[$row->nid] = check_plain($row->title);
   }
- 
+
   drupal_json_output($results);
 }
 
