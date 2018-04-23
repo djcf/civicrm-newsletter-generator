@@ -124,6 +124,11 @@ function ccrm_newsletter_manage() {
     '#type' => 'textfield',
     '#title' => 'Mailing Subject'
   );
+  $form['lead']['name'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Mailing Name (for staff)',
+    '#default' => "Commonspace Daily News " . date("F jS, Y", strtotime("now"))
+  );
   $form['lead']['title'] = array(
     '#type' => 'textfield',
     '#title' => 'Main Article Title'
@@ -249,7 +254,8 @@ function ccrm_newsletter_manage_submit($form, &$form_state) {
   //   'lead_caption' => $form['lead']['caption']['#value']
   // );
   $vars = array(
-    'subject' => $_POST['lead']['subject'],
+    'mailing_subject' => $_POST['lead']['subject'],
+    'mailing_name' => $_POST['lead']['name'],
     'lead_title' => $_POST['lead']['title'],
     'lead_id' => $_POST['lead']['id'],
     'lead_caption' => $_POST['lead']['caption'],

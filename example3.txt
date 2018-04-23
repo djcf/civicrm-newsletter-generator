@@ -1,0 +1,50 @@
+Array
+(
+    [articles] => Array
+        (
+            [11860] => Array
+                (
+                    [title] =>  Robin McAlpine: It's time to end corporate interests' hold over food and housing
+                    [caption] => CommonSpace columnist and Common Weal director Robin McAlpine says Scotland has the opportunity to transform its approach to food and housingIâ€™VE BEEN AT TWO important events in the last couple of weeks and each raised important questions about how we're living in Scotland â€“ and what we should be doing.One was the Scottish Food Summit, the other Common Weal's Good Housekeeping conference. Between them they paint a picture of Britain as a country which has got its priorities upside down.
+                )
+
+            [11865] => Array
+                (
+                    [title] =>  Energy Strategy Consultation: Common Weal submission
+                    [caption] => Common Wealâ€™s submission backed the idea of a national energy company and called for it to control the energy supplied under new schemesCOMMON WEAL has published its paper towards the Scottish Governmentâ€™s draft energy strategy consultation, originally submitted in May.
+                )
+
+            [11864] => Array
+                (
+                    [title] =>  Culls threaten Scottish mountain hares with extinction, warn wildlife groups
+                    [caption] => Environmental and wildlife groups have called on the Scottish Government to take actionMOUNTAIN HARES IN SCOTLAND potentially face local extinctions due to culls, a coalition of 10 environmental and wildlife organisations has warned the Scottish Government.
+                )
+
+            [11862] => Array
+                (
+                    [title] =>  3 in 5 LGBTI people in Scotland say theyâ€™ve been a target of hate crime
+                    [caption] => New report reveals most LGBTI hate crime victims have faced repeated attacksA REPORT PUBLISHED by Equality Network has revealed that a majority of all LGBTI survey respondents have experienced hate crime at some point in their lives.
+                )
+
+            [11863] => Array
+                (
+                    [title] =>  Anti-Trident campaign condemns 
+                    [caption] => Three anti-nuclear weapons activists charged with breach of the peaceTHREE ANTI-NUCLEAR WEAPON ACTIVISTS have been found guilty by a Scottish court on charges of breaching the peace, following their participation in the Trident Ploughshares camp at Peaton Wood on Loch Long.Brian Quail of Glasgow, Angie Zelton of Knighton, Wales and Sam Donaldson of Hull, England were arrested on 11 July, during a blockade the took part in at the Coulport base, part of HMNB Clyde, where the UKâ€™s nuclear arsenal is stored and its Trident submarines are armed.
+                )
+
+        )
+
+    [lead] => Array
+        (
+            [subject] => 
+            [title] => 
+            [id] => 
+            [caption] => 
+        )
+
+    [extra_title] => 
+    [op] => Generate mailing
+    [form_build_id] => form-PMMxlUyy2_Yc6f45hNj_vQscTc1o0n2eZOsVM6NrpaY
+    [form_token] => MCaj6yzwrEvRf-mxd6SxM4QRqFs4-n8qlDzFLMVuZ2c
+    [form_id] => ccrm_newsletter_manage
+)
