@@ -127,7 +127,7 @@ function ccrm_newsletter_manage() {
   $form['lead']['name'] = array(
     '#type' => 'textfield',
     '#title' => 'Mailing Name (for staff)',
-    '#default' => "Commonspace Daily News " . date("F jS, Y", strtotime("now"))
+    '#default_value' => "Commonspace Daily News " . date("F jS, Y", strtotime("now"))
   );
   $form['lead']['title'] = array(
     '#type' => 'textfield',
@@ -262,7 +262,9 @@ function ccrm_newsletter_manage_submit($form, &$form_state) {
     'articles' => $_POST['articles']
   );
 
-  ccrm_prepare_mailing($vars);
+  $mailing_id = ccrm_prepare_mailing($vars);
+
+  drupal_goto("/civicrm/mailing/send?mid=$mailing_id&continue=true&reset=1");
 //  drupal_set_message(t('Ordering have been saved.'));
 }
 

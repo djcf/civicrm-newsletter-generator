@@ -16,8 +16,8 @@ function ccrm_get_image($nid, $style) {
 	if (!$nid) return null;
 
 	$node = node_load($nid);
-	$wrapper = entity_metadata_wrapper('node', $node);
-	$image_uri = $wrapper->field_image->value();
+	//$wrapper = entity_metadata_wrapper('node', $node);
+	$image_uri = $node->field_image['und'][0]['uri']; //$wrapper->field_image->value();
 
 	$derivative_uri = image_style_path($style, $image_uri);
 	$success        = file_exists($derivative_uri) || image_style_create_derivative(image_style_load($style), $image_uri, $derivative_uri);
@@ -32,8 +32,8 @@ function ccrm_prepare_mailing($vars) {
 
 	global $user;
 
-	$vars['lead_image'] = ccrm_get_image($lead_id, "picturebox");
-	$vars['lead_url']   = url("node/$lead_id", array('absolute' => true));
+	$vars['lead_image'] = ccrm_get_image($vars['lead_id'], "picturebox");
+	$vars['lead_url']   = url("node/{$vars['lead_id']}", array('absolute' => true));
 	foreach($vars['articles'] as &$article) {
 		$article['url']   = url("node/{$article['id']}", array('absolute' => true));
 		$article['image'] = ccrm_get_image($article['id'], "thumbnail");
@@ -60,41 +60,45 @@ function ccrm_prepare_mailing($vars) {
 		'body_html' => get_body_html($vars),
 		'created_id'=> $created_id,
 	);
-	print_r($options);
-	die();
+
+	$results = civicrm_api3('Mailing', 'create', $options);
+
+	return $results['id'];
 }
 
 function ccrm_component_format($vars, $template) {
 	$subject = file_get_contents(__DIR__ . "/templates/AutoNewsletter $template.tpl");
+	echo __DIR__ . "/templates/AutoNewsletter $template.tpl";
 	foreach($vars as $search=>$replace) {
 		if (!is_array($search)) {
 			if(!$replace) {
 				$replace = "INSERT_ARTICLE_$replace_HERE";
 			}
-			$subject = str_replace("{" . $search . "}", $replace, $subject);
+			$subject = str_replace("{" . $search . "}", mb_convert_encoding($replace,"HTML-ENTITIES","UTF-8"), $subject);
 		}
 	}
 	return $subject;
 }
 
 function get_body_html($vars) {
-	print_r($vars);
 	$spacer = file_get_contents(__DIR__ . "/templates/spacer.tpl");
 	$r = array($spacer);
-	if ($lead_id) {
+	if ($vars['lead_id']) {
 		$r[] = ccrm_component_format($vars, 'Lead Box');
 		$r[] = $spacer;
 	}
-	foreach(array_chunk($articles, 2) as $article_pair) {
+	foreach(array_chunk($vars['articles'], 2) as $article_pair) {
 		$i = 1;
 		$template_array = array();
+		$size = sizeof($article_pair);
 		while(!empty($article_pair)) {
 			$article = array_shift($article_pair);
 			foreach($article as $article_field => $value) {
-				$template_array[$article_field . "_$i"] = $value;
+				$template_array["article_{$article_field}_$i"] = $value;
 			}
+			$i++;
 		}
-		$r[] = ccrm_component_format($template_array, 'Article Box');
+		$r[] = ccrm_component_format($template_array, "Article Box-$size");
 		$r[] = $spacer;
 	}
 	return implode($r, "\n\n\n<!--*******************************-->\n\n\n");
@@ -103,9 +107,8 @@ function get_body_html($vars) {
 function get_body_text($vars) {
 	extract($vars);
 	$r = array("COMMONSPACE DAILY NEWSLETTER");
-	$r[] = "";
-	$r[] = "";
-	$r[] = "!($lead_image)";
+//	$r[] = "";
+//	$r[] = "!($lead_image)";
 	$r[] = "";
 	$r[] = $lead_title;
 	$r[] = str_repeat('=', strlen($lead_title));
@@ -113,7 +116,7 @@ function get_body_text($vars) {
 	$r[] = $lead_url;
 	$r[] = "";
 	foreach($articles as $nid => $article) {
-		$r[] = "!({$article['image']})";
+//		$r[] = "!({$article['image']})";
 		$r[] = $article['title'];
 		$r[] = str_repeat('-', strlen($article['title']));
 		$r[] = $article['caption'];

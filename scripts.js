@@ -110,11 +110,12 @@ var captions = {captiontable};
 	  				  $('#edit-lead-subject').val(title);
 	  				  $('#lead-id')          .val(id);
 	  				  $('#edit-lead-caption').text(caption);
+	  				  parent.remove();
 				  });
 				});
 				if($("#tr-" + id).length == 0) {
 					$('#slides-order').addTableRow(newRow);
-					$(this).fadeOut(function() { });
+					$(this).fadeOut(function() { $(this).remove(); });
 				}
 				newRow.find('a.remove-row').click(function(event) {
 					event.preventDefault();
@@ -124,11 +125,12 @@ var captions = {captiontable};
 				  chkbox_tpl = chkbox_tpl.replace(/{title}/g, title);
 				  parent.fadeOut(function() {
 	  				  $('#edit-aarticles').append(chkbox_tpl);
+	  				  parent.remove();
 				  });
 				});
 				if($("#tr-" + id).length == 0) {
 					$('#slides-order').addTableRow(newRow);
-					$(this).fadeOut(function() { });
+					$(this).fadeOut(function() { $(this).remove(); });
 				}
 			}
 		}
